@@ -11,7 +11,7 @@ import AsyncDisplayKit
 class FullScreenVideoController: ASViewController<ASDisplayNode> {
 
     var statusBarHidden = false
-    let mainVideoUrl: URL = URL(string: "https://www.youtube.com/watch?v=oHg5SJYRHA0")!
+    let mainVideoUrl: URL = URL(string: "https://res.cloudinary.com/vimvest/video/upload/v1533855230/Onboarding%20Media/Vimvest_Full_Video_-_Vimeo_1080p_Compressed.mp4")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,12 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        videoNode.play()
+        goFullScreen()
+    }
+
     lazy var contentNode: ASDisplayNode = {
         let node = ASDisplayNode()
         node.automaticallyManagesSubnodes = true
@@ -80,7 +86,8 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
 
     lazy var videoNode: ASVideoNode = {
         let videoNode = ASVideoNode()
-        let asset = AVAsset(url: mainVideoUrl)
+        let videoPath = Bundle.main.path(forResource: "RickRoll'D", ofType: ".mp4")!
+        let asset = AVAsset(url: URL(fileURLWithPath: videoPath))
         videoNode.asset = asset
         videoNode.shouldAutoplay = true
         videoNode.shouldAutorepeat = true
@@ -102,7 +109,7 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
 
     lazy var fullScreenButton: ASDisplayNode = {
         let button = ASButtonNode()
-        button.addTarget(self, action: #selector(goFullScreen), forControlEvents: .touchUpInside)
+        button.addTarget(self, action: #selector(goFullScreenTapped), forControlEvents: .touchUpInside)
         button.backgroundColor = .white
         button.cornerRadius = 4.clasp
         button.setTitle("Go Full Screen", with: .systemFont(ofSize: 12.clasp, weight: .medium), with: .black, for: .normal)
@@ -122,7 +129,7 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
         })
     }
 
-    @objc func goFullScreen(_ sender: ASButtonNode) {
+    func goFullScreen() {
         var transform = CATransform3DMakeRotation(-.pi/2, 0, 0, 1)
         let scale = UIScreen.main.bounds.height/self.videoNode.bounds.width
         transform = CATransform3DScale(transform, scale, scale, 1)
@@ -131,6 +138,10 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
             self.videoNode.transform = transform
             self.closeButton.transform = CATransform3DMakeTranslation(translation, 0, 0)
         }
+    }
+
+    @objc func goFullScreenTapped(_ sender: ASButtonNode) {
+        goFullScreen()
     }
 
 }
