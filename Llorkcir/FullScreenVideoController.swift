@@ -8,111 +8,6 @@
 
 import AsyncDisplayKit
 
-extension CGSize {
-
-    var asl: ASLayoutSize {
-        return ASLayoutSize(width: width.asd, height: height.asd)
-    }
-
-    init(diameter: CGFloat) {
-        self.init(width: diameter, height: diameter)
-    }
-
-    func adjustToScreenSize() -> CGSize {
-        return CGSize(
-            width: width.adjustToScreenSize(),
-            height: height.adjustToScreenSize()
-        )
-    }
-
-    func pixelRound() -> CGSize {
-        return CGSize(
-            width: width.pixelRound(),
-            height: height.pixelRound()
-        )
-    }
-
-    var clasp: CGSize {
-        return CGSize(
-            width: width.clasp,
-            height: height.clasp
-        )
-    }
-}
-
-extension UIScreen {
-
-    enum DeviceType {
-        case iPad
-        case small
-        case medium
-        case large
-    }
-
-    static func getDevice() -> DeviceType {
-        switch main.bounds.size.width {
-        case 320:
-            if main.bounds.size.height == 480 {
-                return .iPad
-            } else {
-                return .small
-            }
-        case 375:
-            return .medium
-        case 414:
-            return .large
-        default:
-            return .large
-        }
-    }
-
-    static var deviceType = getDevice()
-}
-
-extension CGFloat {
-
-    var clasp: CGFloat { return self.adjustToScreenSize().pixelRound() }
-
-    func adjustToScreenSize() -> CGFloat {
-        switch UIScreen.deviceType {
-        case .small, .iPad:
-            return self * 0.7729468599 // 320.0/414.0
-        case .medium:
-            return self * 0.9057971014 // 375.0/414.0
-        case .large:
-            return self
-        }
-    }
-
-    func pixelRound() -> CGFloat {
-        switch UIScreen.main.scale {
-        case 3:
-            let truncatingRemainder = self.truncatingRemainder(dividingBy: 1)
-            switch truncatingRemainder {
-            case 0..<0.1666666667:
-                return floor(self)
-            case 0.1666666667..<0.5:
-                return floor(self) + 0.33
-            case 0.5..<0.8333333333:
-                return floor(self) + 0.67
-            default:
-                return floor(self) + 1
-            }
-        default:
-            let value: CGFloat = UIScreen.main.scale == 1 ? 1 : 0.5
-            let remainder = self.truncatingRemainder(dividingBy: value)
-            let shouldRoundUp = remainder >= (value / 2) ? true : false
-            let multiple = floor(self / value)
-            return !shouldRoundUp ? value * multiple : value * multiple + value
-        }
-    }
-
-}
-
-extension Int {
-    var clasp: CGFloat { return CGFloat(self).adjustToScreenSize().pixelRound() }
-}
-
 class FullScreenVideoController: ASViewController<ASDisplayNode> {
 
     var statusBarHidden = false
@@ -195,14 +90,22 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
     } ()
 
     lazy var closeButton: ASButtonNode = {
-        let button = ImageButtonNode(image: #imageLiteral(resourceName: "NavBarXIcon"))
+        let button = ASButtonNode()
+        let image: UIImage = #imageLiteral(resourceName: "NavBarXIcon")
+        button.setImage(image, for: .normal)
+        button.imageNode.style.preferredLayoutSize = image.size.clasp.asl
+        button.imageNode.contentMode = .scaleToFill
         button.addTarget(self, action: #selector(close), forControlEvents: .touchUpInside)
-        button.hitTestSlop = UIEdgeInsets(inset: -25.clasp)
+        button.hitTestSlop = UIEdgeInsets(top: -25.clasp, left: -25.clasp, bottom: -25.clasp, right: -25.clasp)
         return button
     } ()
 
     lazy var fullScreenButton: ASDisplayNode = {
-        let button = WhiteGradientButtonNode(title: "Go Full Screen".localize(), isDynamicSize: true, tapped: goFullScreen)
+        let button = ASButtonNode()
+        button.addTarget(self, action: #selector(goFullScreen), forControlEvents: .touchUpInside)
+        button.backgroundColor = .white
+        button.cornerRadius = 4.clasp
+        button.setTitle("Go Full Screen", with: .systemFont(ofSize: 12.clasp, weight: .medium), with: .black, for: .normal)
         button.style.preferredLayoutSize = CGSize(width: 150, height: 35).clasp.asl
         return button
     } ()
@@ -219,7 +122,7 @@ class FullScreenVideoController: ASViewController<ASDisplayNode> {
         })
     }
 
-    private func goFullScreen() {
+    @objc func goFullScreen(_ sender: ASButtonNode) {
         var transform = CATransform3DMakeRotation(-.pi/2, 0, 0, 1)
         let scale = UIScreen.main.bounds.height/self.videoNode.bounds.width
         transform = CATransform3DScale(transform, scale, scale, 1)

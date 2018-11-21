@@ -13,6 +13,7 @@
 		0A39CA2B21A5C6FB0052422E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A39CA2A21A5C6FB0052422E /* Assets.xcassets */; };
 		0A39CA2E21A5C6FB0052422E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A39CA2C21A5C6FB0052422E /* LaunchScreen.storyboard */; };
 		0A39CA3621A5C88A0052422E /* FullScreenVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A39CA3521A5C88A0052422E /* FullScreenVideoController.swift */; };
+		0A39CA3821A5CD040052422E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A39CA3721A5CD040052422E /* Extensions.swift */; };
 		9CAB061799616C2E837595C8 /* Pods_Llorkcir.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEC8D8F17D835E1FDB26918 /* Pods_Llorkcir.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		0A39CA2D21A5C6FB0052422E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A39CA2F21A5C6FB0052422E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A39CA3521A5C88A0052422E /* FullScreenVideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenVideoController.swift; sourceTree = "<group>"; };
+		0A39CA3721A5CD040052422E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5F8B4C7A1F5E2DAD3064AF4B /* Pods-Llorkcir.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Llorkcir.release.xcconfig"; path = "Pods/Target Support Files/Pods-Llorkcir/Pods-Llorkcir.release.xcconfig"; sourceTree = "<group>"; };
 		8F8EDF9A5882D707633C0EEB /* Pods-Llorkcir.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Llorkcir.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Llorkcir/Pods-Llorkcir.debug.xcconfig"; sourceTree = "<group>"; };
 		CDEC8D8F17D835E1FDB26918 /* Pods_Llorkcir.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Llorkcir.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +69,7 @@
 				0A39CA2521A5C6F90052422E /* ViewController.swift */,
 				0A39CA2721A5C6F90052422E /* Main.storyboard */,
 				0A39CA3521A5C88A0052422E /* FullScreenVideoController.swift */,
+				0A39CA3721A5CD040052422E /* Extensions.swift */,
 				0A39CA2A21A5C6FB0052422E /* Assets.xcassets */,
 				0A39CA2C21A5C6FB0052422E /* LaunchScreen.storyboard */,
 				0A39CA2F21A5C6FB0052422E /* Info.plist */,
@@ -220,6 +223,7 @@
 				0A39CA3621A5C88A0052422E /* FullScreenVideoController.swift in Sources */,
 				0A39CA2621A5C6F90052422E /* ViewController.swift in Sources */,
 				0A39CA2421A5C6F90052422E /* AppDelegate.swift in Sources */,
+				0A39CA3821A5CD040052422E /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
